@@ -29,10 +29,11 @@ public class User implements UserDetails {
     private String id;
 
     @Column(nullable = false)
-    @JsonView(JsonViews.GameListView.class)
+    @JsonView({JsonViews.GameListView.class, JsonViews.UserShowView.class})
     private String username;
 
     @Column(nullable = false)
+    @JsonView(JsonViews.UserShowView.class)
     private String email;
 
     @Column(nullable = false)
@@ -41,9 +42,11 @@ public class User implements UserDetails {
     private String avatar ;
 
     @Column(nullable = false)
+    @JsonView(JsonViews.UserShowView.class)
     private LocalDate birthedAt;
 
     @Column(nullable = false)
+    @JsonView(JsonViews.UserShowView.class)
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
@@ -56,8 +59,7 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<Game> games = new ArrayList<>();
-
-
+    
     public Boolean isAdmin(){
         return this.roles.contains("ADMIN_ROLE");
     }

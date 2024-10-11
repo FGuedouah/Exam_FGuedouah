@@ -39,16 +39,14 @@ public class SecurityConfig {
                     .requestMatchers(
                         AntPathRequestMatcher.antMatcher("/v3/api-docs/**"),
                         AntPathRequestMatcher.antMatcher("/swagger-ui/**"),
-                        AntPathRequestMatcher.antMatcher(HttpMethod.GET,"/api/listing/**"),
-                            AntPathRequestMatcher.antMatcher(HttpMethod.GET,"/api/admin/brand"),
-                            AntPathRequestMatcher.antMatcher(HttpMethod.GET,"/api/user/activate/**")
+                        AntPathRequestMatcher.antMatcher("/api/coordinate/**"),
+                            AntPathRequestMatcher.antMatcher("/api/game/**"),
+                            AntPathRequestMatcher.antMatcher("/api/map/**"),
+                            AntPathRequestMatcher.antMatcher("/api/round/**")
                     ).permitAll()
                     .requestMatchers(
                         AntPathRequestMatcher.antMatcher("/api/user/**")
-                    ).authenticated()
-/*                    .requestMatchers(
-                        AntPathRequestMatcher.antMatcher("/api/admin/**")
-                    ).hasAuthority("ROLE_ADMIN")*/
+                            ).authenticated()
             );
         return http.build();
     }

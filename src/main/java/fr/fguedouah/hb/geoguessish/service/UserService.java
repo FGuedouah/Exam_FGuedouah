@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,4 +52,9 @@ public class UserService implements ServiceInterface<User, String, UserCreateDTO
                 user.getAuthorities()
         );
     }
+
+    public User show(Principal principal){
+           return userRepository.findOneUserByEmail(principal.getName());
+    }
+
 }
