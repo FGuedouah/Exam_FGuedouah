@@ -19,6 +19,7 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @JsonView(JsonViews.GameMinimalView.class)
     private String id;
 
     @Column(nullable = false)
@@ -46,6 +47,7 @@ public class Game {
     private Integer nbRounds;
 
     @ManyToOne
+    @JsonView(JsonViews.GameListView.class)
     private User user;
 
     @OneToMany(mappedBy = "game")
@@ -64,6 +66,7 @@ public class Game {
         return totalPoints;
     }*/
 
+    @JsonView(JsonViews.GameListView.class)
     public int getTotalPoints(){
         int totalPoints = this.rounds.stream().mapToInt(Round::getPoints).sum();
         return totalPoints;

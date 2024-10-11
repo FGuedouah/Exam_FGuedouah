@@ -1,14 +1,16 @@
 package fr.fguedouah.hb.geoguessish.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import fr.fguedouah.hb.geoguessish.json_views.JsonViews;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 import org.json.JSONArray;
-/*import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;*/
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,13 +22,14 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Data
-public class User /*implements UserDetails*/ {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Column(nullable = false)
+    @JsonView(JsonViews.GameListView.class)
     private String username;
 
     @Column(nullable = false)
@@ -44,6 +47,7 @@ public class User /*implements UserDetails*/ {
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
+    @JsonView(JsonViews.GameListView.class)
     private Integer level;
 
     @Column(nullable = false)
@@ -58,7 +62,7 @@ public class User /*implements UserDetails*/ {
         return this.roles.contains("ADMIN_ROLE");
     }
 
-/*    @Override
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         JSONArray roles = new JSONArray(this.roles);
@@ -66,5 +70,5 @@ public class User /*implements UserDetails*/ {
             authorities.add(new SimpleGrantedAuthority(role.toString()));
         });
         return authorities;
-    }*/
+    }
 }
